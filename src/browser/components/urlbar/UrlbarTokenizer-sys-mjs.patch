@@ -1,0 +1,20 @@
+diff --git a/browser/components/urlbar/UrlbarTokenizer.sys.mjs b/browser/components/urlbar/UrlbarTokenizer.sys.mjs
+index 6634ad5ca8ceff7602e8b299748f31e8cd2adac3..59ff144b4759bdbbf6d715f6827cbdcf30c84b9d 100644
+--- a/browser/components/urlbar/UrlbarTokenizer.sys.mjs
++++ b/browser/components/urlbar/UrlbarTokenizer.sys.mjs
+@@ -83,6 +83,7 @@ export var UrlbarTokenizer = {
+     TITLE: "#",
+     URL: "$",
+     ACTION: ">",
++    WORKSPACE: "@",
+   },
+ 
+   // The keys of characters in RESTRICT that will enter search mode.
+@@ -92,6 +93,7 @@ export var UrlbarTokenizer = {
+       this.RESTRICT.BOOKMARK,
+       this.RESTRICT.OPENPAGE,
+       this.RESTRICT.SEARCH,
++      this.RESTRICT.WORKSPACE,
+     ];
+     if (lazy.UrlbarPrefs.get("scotchBonnet.enableOverride")) {
+       keys.push(this.RESTRICT.ACTION);
