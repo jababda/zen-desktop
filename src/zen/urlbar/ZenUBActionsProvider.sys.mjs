@@ -134,9 +134,13 @@ export class ZenUrlbarProviderGlobalActions extends UrlbarProvider {
 
   /**
    * @param {Window} window The window to check available actions for.
-   * @returns {Array} All the available global actions.
+   * @param {string} query The user's search query.
+   * @returns All the available global actions.
    */
-  async #getAvailableActions(window) {
+  async #getAvailableActions(window, query) {
+    if (query.startsWith("@")) {
+      return this.#getWorkspaceActions(window);
+    }
     return globalActions
       .filter((a) => a.isAvailable(window))
       .concat(this.#getWorkspaceActions(window))
@@ -146,12 +150,12 @@ export class ZenUrlbarProviderGlobalActions extends UrlbarProvider {
   /**
    * Starts a search query amongst the available global actions.
    *
-   * @param {string} query The user's search query.
-   * @param {boolean} isPrefixed Whether the query is prefixed.
+   * @param {string} query The user"s search query.
+   *
    */
   async #findMatchingActions(query, isPrefixed) {
     const window = lazy.BrowserWindowTracker.getTopWindow();
-    const actions = await this.#getAvailableActions(window);
+    const actions = await this.#getAvailableActions(window, query);
     let results = [];
     for (let action of actions) {
       if (isPrefixed && query.length < 1) {
