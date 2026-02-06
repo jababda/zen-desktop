@@ -1,5 +1,5 @@
 diff --git a/browser/components/urlbar/UrlbarUtils.sys.mjs b/browser/components/urlbar/UrlbarUtils.sys.mjs
-index b97fa81cef276e4bb22414b7c182e00b4bb835dc..1f489eceead0aa331ace59281cb777db5e635366 100644
+index b97fa81cef276e4bb22414b7c182e00b4bb835dc..2c38f0ffcc03c65d5997feece481b1e8ccd3c702 100644
 --- a/browser/components/urlbar/UrlbarUtils.sys.mjs
 +++ b/browser/components/urlbar/UrlbarUtils.sys.mjs
 @@ -81,6 +81,7 @@ export var UrlbarUtils = {
@@ -18,7 +18,22 @@ index b97fa81cef276e4bb22414b7c182e00b4bb835dc..1f489eceead0aa331ace59281cb777db
    }),
  
    // Per-result exposure telemetry.
-@@ -552,6 +554,8 @@ export var UrlbarUtils = {
+@@ -271,6 +273,14 @@ export var UrlbarUtils = {
+         telemetryLabel: "actions",
+         uiLabel: "urlbar-searchmode-actions",
+       },
++      {
++        source: this.RESULT_SOURCE.ZEN_ACTIONS,
++        restrict: lazy.UrlbarTokenizer.RESTRICT.WORKSPACE,
++        icon: "chrome://browser/skin/tabs.svg",
++        pref: "shortcuts.zen-actions",
++        telemetryLabel: "zen-actions",
++        uiLabel: "urlbar-searchmode-zen-actions",
++      },
+     ];
+   },
+ 
+@@ -552,6 +562,8 @@ export var UrlbarUtils = {
            return this.RESULT_GROUP.HEURISTIC_FALLBACK;
          case "UrlbarProviderHistoryUrlHeuristic":
            return this.RESULT_GROUP.HEURISTIC_HISTORY_URL;
@@ -27,3 +42,23 @@ index b97fa81cef276e4bb22414b7c182e00b4bb835dc..1f489eceead0aa331ace59281cb777db
          case "UrlbarProviderOmnibox":
            return this.RESULT_GROUP.HEURISTIC_OMNIBOX;
          case "UrlbarProviderRestrictKeywordsAutofill":
+@@ -1329,6 +1341,9 @@ export var UrlbarUtils = {
+         if (result.payload.keyword === lazy.UrlbarTokenizer.RESTRICT.ACTION) {
+           return "restrict_keyword_actions";
+         }
++        if (result.payload.keyword === lazy.UrlbarTokenizer.RESTRICT.) {
++          return "restrict_keyword_tabs";
++        }
+     }
+     return "unknown";
+   },
+@@ -1618,6 +1633,9 @@ export var UrlbarUtils = {
+         if (result.payload.keyword === lazy.UrlbarTokenizer.RESTRICT.ACTION) {
+           return "restrict_keyword_actions";
+         }
++         if (result.payload.keyword === lazy.UrlbarTokenizer.RESTRICT.WORKSPACE) {
++          return "restrict_keyword_workspace";
++        }
+     }
+ 
+     return "unknown";

@@ -1,16 +1,24 @@
 diff --git a/browser/components/urlbar/UrlbarTokenizer.sys.mjs b/browser/components/urlbar/UrlbarTokenizer.sys.mjs
-index 6634ad5ca8ceff7602e8b299748f31e8cd2adac3..59ff144b4759bdbbf6d715f6827cbdcf30c84b9d 100644
+index 6634ad5ca8ceff7602e8b299748f31e8cd2adac3..9f05ad0aa51db469dcc67a3d252c6896a53c18e7 100644
 --- a/browser/components/urlbar/UrlbarTokenizer.sys.mjs
 +++ b/browser/components/urlbar/UrlbarTokenizer.sys.mjs
-@@ -83,6 +83,7 @@ export var UrlbarTokenizer = {
+@@ -66,6 +66,7 @@ export var UrlbarTokenizer = {
+     // `looksLikeOrigin()` returned `LOOKS_LIKE_ORIGIN.OTHER` for this token. It
+     // may or may not be an origin.
+     POSSIBLE_ORIGIN_BUT_SEARCH_ALLOWED: 12,
++    RESTRICT_WORKSPACE: 13,
+   },
+ 
+   // The special characters below can be typed into the urlbar to restrict
+@@ -83,6 +84,7 @@ export var UrlbarTokenizer = {
      TITLE: "#",
      URL: "$",
      ACTION: ">",
-+    WORKSPACE: "@",
++    WORKSPACE: "!",
    },
  
    // The keys of characters in RESTRICT that will enter search mode.
-@@ -92,6 +93,7 @@ export var UrlbarTokenizer = {
+@@ -92,6 +94,7 @@ export var UrlbarTokenizer = {
        this.RESTRICT.BOOKMARK,
        this.RESTRICT.OPENPAGE,
        this.RESTRICT.SEARCH,
